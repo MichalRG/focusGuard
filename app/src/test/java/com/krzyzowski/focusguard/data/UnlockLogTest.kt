@@ -19,6 +19,7 @@ import java.io.File
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.ZoneOffset
 
 class UnlockLogTest {
@@ -27,13 +28,14 @@ class UnlockLogTest {
 
     private val dataStoreScope = CoroutineScope(Dispatchers.IO + Job())
 
+    private var zone: ZoneId = ZoneOffset.UTC
+
     private val unlockLog by lazy {
         UnlockLog(
             PreferenceDataStoreFactory.create(scope = dataStoreScope) {
                 File(folder.root, "focus.preferences_pb")
             },
-            ZoneOffset.UTC,
-        )
+        ) { zone }
     }
 
     @After
@@ -171,5 +173,16 @@ class UnlockLogTest {
             ),
             week,
         )
+    }
+
+    @Test
+    fun `an unlock after a time zone change counts for the local day of the new zone`() = runTest {
+        unlockLog.record(Instant.parse("2026-10-29T12:00:00Z"))
+        zone = ZoneId.of("Europe/Warsaw")
+
+        val recorded = unlockLog.record(Instant.parse("2026-10-29T23:30:00Z"))
+
+        assertEquals(1, recorded.unlocksToday)
+        assertEquals(1, unlockLog.dailyCounts.first().countOn(LocalDate.parse("2026-10-30")))
     }
 }

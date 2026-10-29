@@ -11,59 +11,74 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="24dp"
         android:background="@drawable/prompt_card"
         android:orientation="vertical"
         android:padding="24dp">
 
-        <TextView
+        <!-- Shrinks and scrolls when the text does not fit, so the OK button below always stays on screen. -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prompt_question"
-            android:textColor="@color/prompt_text_primary"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fadeScrollbars="false">
 
-        <TextView
-            android:id="@+id/unlock_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="@color/prompt_accent"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/previous_unlock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/prompt_text_secondary"
-            android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prompt_question"
+                    android:textColor="@color/prompt_text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/prompt_word_title"
-            android:textAllCaps="true"
-            android:textColor="@color/prompt_text_secondary"
-            android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/unlock_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/prompt_accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/word_english"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/prompt_accent"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/previous_unlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/prompt_text_secondary"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/word_polish"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/prompt_text_primary"
-            android:textSize="18sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/prompt_word_title"
+                    android:textAllCaps="true"
+                    android:textColor="@color/prompt_text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/word_english"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/prompt_accent"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/word_polish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/prompt_text_primary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/ok"

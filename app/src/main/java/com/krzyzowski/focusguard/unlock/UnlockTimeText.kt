@@ -6,7 +6,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class UnlockTimeText(private val zone: ZoneId, locale: Locale) {
+class UnlockTimeText(private val zone: () -> ZoneId, locale: Locale) {
     private val timeOfDay = DateTimeFormatter.ofPattern("HH:mm", locale)
     private val dayAndTime = DateTimeFormatter.ofPattern("EEE d MMM, HH:mm", locale)
 
@@ -14,8 +14,9 @@ class UnlockTimeText(private val zone: ZoneId, locale: Locale) {
         "${clockTime(unlockedAt, now)} · ${elapsed(unlockedAt, now)}"
 
     private fun clockTime(unlockedAt: Instant, now: Instant): String {
-        val unlocked = unlockedAt.atZone(zone)
-        val sameDay = unlocked.toLocalDate() == now.atZone(zone).toLocalDate()
+        val currentZone = zone()
+        val unlocked = unlockedAt.atZone(currentZone)
+        val sameDay = unlocked.toLocalDate() == now.atZone(currentZone).toLocalDate()
         return (if (sameDay) timeOfDay else dayAndTime).format(unlocked)
     }
 

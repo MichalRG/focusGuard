@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import java.time.Instant
 import java.time.ZoneId
 
-class UnlockLog(private val dataStore: DataStore<Preferences>, private val zone: ZoneId) {
+class UnlockLog(private val dataStore: DataStore<Preferences>, private val zone: () -> ZoneId) {
     val lastUnlock: Flow<Instant?> = dataStore.data.map { it.lastUnlock() }
 
     val dailyCounts: Flow<DailyUnlockCounts> = dataStore.data.map { it.dailyCounts() }
@@ -18,7 +18,7 @@ class UnlockLog(private val dataStore: DataStore<Preferences>, private val zone:
     suspend fun record(at: Instant): RecordedUnlock {
         lateinit var recorded: RecordedUnlock
         dataStore.edit {
-            val today = at.atZone(zone).toLocalDate()
+            val today = at.atZone(zone()).toLocalDate()
             val counts = it.dailyCounts().recordUnlockOn(today)
             recorded = RecordedUnlock(at = at, previousUnlock = it.lastUnlock(), unlocksToday = counts.countOn(today))
             it[LAST_UNLOCK_EPOCH_MS] = at.toEpochMilli()

@@ -3,11 +3,13 @@ package com.krzyzowski.focusguard.unlock
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.Instant
+import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.Locale
 
 class UnlockTimeTextTest {
-    private val text = UnlockTimeText(ZoneOffset.UTC, Locale.UK)
+    private var zone: ZoneId = ZoneOffset.UTC
+    private val text = UnlockTimeText({ zone }, Locale.UK)
 
     @Test
     fun `an unlock under a minute ago reads as just now`() {
@@ -77,5 +79,17 @@ class UnlockTimeTextTest {
         )
 
         assertEquals("Mon 26 Oct, 09:00 · 3 days ago", described)
+    }
+
+    @Test
+    fun `times are shown in the zone the phone is in now`() {
+        zone = ZoneId.of("Europe/Warsaw")
+
+        val described = text.describe(
+            unlockedAt = Instant.parse("2026-10-29T13:32:00Z"),
+            now = Instant.parse("2026-10-29T13:40:00Z"),
+        )
+
+        assertEquals("14:32 · 8 min ago", described)
     }
 }
