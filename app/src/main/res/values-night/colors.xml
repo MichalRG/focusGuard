@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="prompt_scrim">#CC000000</color>
+    <color name="prompt_card">#FF2B2930</color>
+    <color name="prompt_text_primary">#FFE6E1E5</color>
+    <color name="prompt_text_secondary">#FFCAC4D0</color>
+    <color name="prompt_accent">#FFB4C1FF</color>
+</resources>

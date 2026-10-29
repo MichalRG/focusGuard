@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Focus Guard</string>
+
+    <string name="focus_mode">Focus mode</string>
+    <string name="focus_mode_on">On — you will be asked on every unlock</string>
+    <string name="focus_mode_off">Off</string>
+    <string name="main_last_unlock">Last unlock: %1$s</string>
+    <string name="main_no_unlock">No unlock recorded yet</string>
+    <plurals name="main_unlocks_today">
+        <item quantity="one">%1$d unlock today</item>
+        <item quantity="other">%1$d unlocks today</item>
+    </plurals>
+    <string name="main_last_7_days">Last 7 days</string>
+
+    <string name="needed_for_focus_mode">Needed for focus mode</string>
+    <string name="permission_notifications">Notifications</string>
+    <string name="permission_overlay">Display over other apps</string>
+    <string name="permission_battery">Battery: unrestricted</string>
+    <string name="permission_allowed">Allowed</string>
+    <string name="permission_open_settings">Open settings</string>
+
+    <string name="prompt_question">Are you sure you need to check something on your phone?</string>
+    <string name="prompt_unlock_count">Unlock #%1$d today</string>
+    <string name="prompt_last_unlock">Last unlock: %1$s</string>
+    <string name="prompt_no_previous_unlock">No earlier unlock recorded yet</string>
+    <string name="prompt_word_title">Word of unlock</string>
+    <string name="prompt_ok">OK</string>
+    <string name="prompt_ok_wait">OK (%1$d)</string>
+
+    <string name="prompt_window_title">Ask only when unlocking too often</string>
+    <string name="prompt_window_explanation">Show the card only if the previous unlock was less than this long ago. Off shows it on every unlock.</string>
+    <string name="prompt_window_off">Off</string>
+    <string name="prompt_window_minutes">%1$d min</string>
+    <string name="prompt_window_hours">%1$d h</string>
+
+    <string name="tile_label">Focus mode</string>
+
+    <string name="channel_focus_mode">Focus mode running</string>
+    <string name="channel_unlock_reminder">Unlock reminder</string>
+    <string name="notification_focus_on">Focus mode is on</string>
+</resources>
